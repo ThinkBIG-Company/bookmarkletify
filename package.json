@@ -22,13 +22,10 @@
     "bookmarklet"
   ],
   "dependencies": {
-    "concat-stream": "^3.0.1",
+    "concat-stream": "^2.0.0",
     "nomnom": "^1.8.1",
-    "string-to-stream": "^1.0.0",
+    "string-to-stream": "^3.0.1",
     "uglify-js": "~3.13.9",
-    "vows": "~0.6.4"
-  },
-  "devDependencies": {
     "vows": "^0.8.3"
   }
 }
