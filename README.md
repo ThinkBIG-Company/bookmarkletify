@@ -13,7 +13,7 @@ npm install bookmarkletify
 
 ```js
 var bookmarkletify = require('bookmarkletify');
-var source = 'alert( window.location    )';
+var source = 'alert(window.location)';
 var bookmarkletString = bookmarkletify(source);
 
 console.log(bookmarkletString); //javascript:(function(){;alert(window.location);})()
