@@ -13,7 +13,7 @@ function minify(code) {
         mangle: false,
         output: {
             ast: false,
-            code: false // optional - faster if false
+            code: true // optional - faster if false
         }
     });
     //console.log(result.error); // runtime error, or `undefined` if no error
