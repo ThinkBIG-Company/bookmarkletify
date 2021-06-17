@@ -12,7 +12,7 @@ function minify(code) {
         compress: true,
         mangle: true,
         output: {
-            ast: false,
+            ast: true,
             code: true // optional - faster if false
         }
     });
