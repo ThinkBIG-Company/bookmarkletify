@@ -9,8 +9,8 @@ module.exports = function(code) {
 function minify(code) {
     var result = UglifyJS.minify(code, {
         parse: {},
-        compress: false,
-        mangle: false,
+        compress: true,
+        mangle: true,
         output: {
             ast: false,
             code: true // optional - faster if false
