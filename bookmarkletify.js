@@ -7,7 +7,7 @@ module.exports = function(code) {
 }
 
 function minify(code) {
-    var result = UglifyJS.minify(code, {
+    var result = UglifyJSs.minify(code, {
         parse: {},
         compress: false,
         mangle: false,
