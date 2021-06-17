@@ -2,7 +2,7 @@ var UglifyJS = require("uglify-js");
 
 module.exports = function(source) {
     var min = encodeURI(minify(source));
-    var result = 'javascript:(function(){;' + min + ';})()';
+    var result = 'javascript:(function(){;' + min + '})()';
     return result;
 }
 
