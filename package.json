@@ -1,6 +1,6 @@
 {
   "name": "bookmarkletify",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "From a single javascript file, create a bookmarklet",
   "main": "bookmarkletify.js",
   "bin": {
