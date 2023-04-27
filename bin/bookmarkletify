@@ -1,21 +1,23 @@
 #!/usr/bin/env node
 
-var nomnom = require('nomnom')
-var cli = require('./cli')
+const yargs = require('yargs')
+const cli = require('./cli')
 
-var opts = nomnom
-  .script("bookmarkletify")
-  .options({
-    infile:{
-      position: 0,
-      help: "js file to bookmarkletify"
-    },
-    outfile: {
-      abbr: 'o',
-      help: "Write the bookmarklet to this file.\nIf unspecified, prints to stdout."
-    }
+const options = yargs
+  .scriptName('bookmarkletify')
+  .usage('$0 [infile] [options]')
+  .positional('infile', {
+    describe: 'js file to bookmarkletify',
+    type: 'string',
+    demandOption: true
   })
-  .nocolors()
-  .nom()
+  .option('outfile', {
+    alias: 'o',
+    describe: 'Write the bookmarklet to this file. If unspecified, prints to stdout.',
+    type: 'string'
+  })
+  .strict()
+  .wrap(yargs.terminalWidth())
+  .argv;
 
-cli(opts)
+cli(options);

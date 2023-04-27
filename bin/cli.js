@@ -1,23 +1,22 @@
-var fs = require('fs')
-var concat = require('concat-stream')
-var streamify = require('string-to-stream')
-var bookmarkletify = require('../bookmarkletify')
+const fs = require('fs');
+const concat = require('concat-stream');
+const streamify = require('string-to-stream');
+const bookmarkletify = require('../bookmarkletify');
+const { promisify } = require('util');
 
-module.exports = function (opts, cb) {
-  cb = cb || function () {}
-  var input = opts.infile ? fs.createReadStream(opts.infile) : process.stdin
-  var output = opts.outfile ? fs.createWriteStream(opts.outfile) : process.stdout
-  input.on('error', boom)
-  output.on('error', boom)
-  output.on('close', cb)
-  input.pipe(concat(function (buffer) {
-    // TODO: bookmarkletify could be a stream transform...
-    streamify(bookmarkletify(buffer.toString()) + '\n').pipe(output)
-  }))
-}
+const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
-function boom (err) {
-  console.error(err)
-  process.exit(1)
-}
-
+module.exports = async function(opts) {
+  try {
+    const { infile, outfile } = opts;
+    const input = infile ? await readFile(infile) : process.stdin;
+    const output = outfile ? await writeFile(outfile) : process.stdout;
+    const buffer = concat(input);
+    const bookmarklet = bookmarkletify(buffer.toString());
+    streamify(bookmarklet + '\n').pipe(output);
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+};
