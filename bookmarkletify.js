@@ -7,16 +7,31 @@ module.exports = function(code) {
 }
 
 function minify(code) {
-    var result = UglifyJS.minify(code, {
+    const result = UglifyJS.minify(code, {
         parse: {},
-        compress: true,
-        mangle: true,
+        compress: {
+            sequences: true,
+            dead_code: true,
+            conditionals: true,
+            booleans: true,
+            unused: true,
+            if_return: true,
+            drop_console: true
+        },
+        mangle: {
+            toplevel: true,
+            reserved: ['$super', '$', 'exports', 'require']
+        },
         output: {
-            ast: true,
-            code: true // optional - faster if false
+            ast: false,
+            code: true,
+            comments: false,
+            beautify: false
         }
     });
-    //console.log(result.error); // runtime error, or `undefined` if no error
-    //console.log(result.code);  // minified output: function add(n,d){return n+d}
+    if (result.error) {
+        console.error(result.error);
+        return code;
+    }
     return result.code;
 }
