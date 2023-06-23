@@ -16,7 +16,7 @@ function minify(code) {
             booleans: true,
             unused: true,
             if_return: true,
-            drop_console: true
+            drop_console: false
         },
         mangle: {
             toplevel: true,
